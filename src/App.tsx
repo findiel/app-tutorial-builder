@@ -90,7 +90,7 @@ function TodoApp(): JSX.Element {
         >
           <p>Default tutorial tooltip</p>
         </TutorialTooltip>
-        <TutorialTooltip
+        {/* <TutorialTooltip
           active
           content={{
             component: (
@@ -113,7 +113,7 @@ function TodoApp(): JSX.Element {
           }}
         >
           <p>Tutorial tooltip with customized styles</p>
-        </CustomizedTutorialTooltip>
+        </CustomizedTutorialTooltip> */}
       </ThemeProvider>
     </>
   );
