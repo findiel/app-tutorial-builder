@@ -1,4 +1,5 @@
 import React from 'react';
+import StyledTodoWrapper from './components/styles/TodoWrapper.styled';
 import TodoList from './components/TodoList';
 import AddTodoForm from './components/AddTodoForm';
 import GlobalStyles from './components/styles/GlobalStyles.styled';
@@ -13,6 +14,36 @@ export interface Todo {
   title: string;
   isDone: boolean;
 }
+
+const CustomizedTutorialTooltip = styled(TutorialTooltip)`
+  .tutorial-tooltip {
+    background-color: #aceb7b;
+  }
+
+  .title {
+    font-size: 20px;
+    text-align: center;
+    color: black;
+  }
+
+  .text {
+    color: black;
+  }
+
+  .buttons-wrapper {
+    justify-content: flex-end;
+  }
+
+  .skip-tutorial-btn {
+    margin-right: 8px;
+  }
+
+  .next-btn {
+    border: none;
+    background-color: orangered;
+    font-weight: bold;
+  }
+`;
 
 function TodoApp(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
@@ -39,48 +70,47 @@ function TodoApp(): JSX.Element {
     ]);
   };
 
-  const CustomizedTutorialTooltip = styled(TutorialTooltip)`
-    background-color: #aceb7b;
-
-    .title {
-      font-size: 20px;
-      text-align: center;
-      color: black;
-    }
-
-    .text {
-      color: black;
-    }
-
-    .buttons-wrapper {
-      justify-content: flex-end;
-    }
-
-    .skip-tutorial-btn {
-      margin-right: 8px;
-    }
-
-    .next-btn {
-      border: none;
-      background-color: orangered;
-      font-weight: bold;
-    }
-  `;
-
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <h1>TODO APP</h1>
-        <AddTodoForm onAddTodo={addTodoHandler} />
-        <TodoList
-          todos={todos}
-          onRemoveTodo={removeTodoHandler}
-          onToggleTodo={toggleTodoDoneHandler}
-        />
+        <StyledTodoWrapper>
+          {/* <TutorialTooltip
+            // placement="top"
+            active
+            content={{
+              title: 'Hello World',
+              text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            }}
+          > */}
+          <h1>TODO APP</h1>
+          {/* </TutorialTooltip> */}
+          <AddTodoForm onAddTodo={addTodoHandler} />
+          <TodoList
+            todos={todos}
+            onRemoveTodo={removeTodoHandler}
+            onToggleTodo={toggleTodoDoneHandler}
+          />
+        </StyledTodoWrapper>
         <br />
         <br />
         <br />
+
+        <div style={{ width: 400, height: 300 }}></div>
+
+        {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <TutorialTooltip
+            active
+            content={{
+              title: 'Hello World',
+              text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            }}
+          >
+            <p>Default tutorial tooltip</p>
+          </TutorialTooltip>
+        </div> */}
+
+        {/* <div style={{ display: 'flex' }}> */}
         <TutorialTooltip
           active
           content={{
@@ -88,8 +118,12 @@ function TodoApp(): JSX.Element {
             text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
           }}
         >
-          <p>Default tutorial tooltip</p>
+          <p style={{ marginBottom: 40 }}>Default tutorial tooltip</p>
         </TutorialTooltip>
+        {/* </div> */}
+
+        {/* <div style={{ width: 400, height: 300 }}></div> */}
+
         {/* <TutorialTooltip
           active
           content={{
@@ -104,8 +138,9 @@ function TodoApp(): JSX.Element {
           }}
         >
           <p>Tutorial tooltip with customized content - a component</p>
-        </TutorialTooltip>
-        <CustomizedTutorialTooltip
+        </TutorialTooltip> */}
+
+        {/* <CustomizedTutorialTooltip
           active
           content={{
             title: 'Hello World',

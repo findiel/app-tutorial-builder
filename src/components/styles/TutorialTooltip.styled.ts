@@ -15,13 +15,14 @@ export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
   position: absolute;
   top: ${({ top }) => top + 'px'};
   left: ${({ left }) => left + 'px'};
-  min-width: 250px;
+  min-width: 300px;
   max-width: 500px;
   background-color: ${({ theme }) => theme.colors.primary.main};
   color: ${({ theme }) => theme.colors.common.white};
   border-radius: 16px;
   color: white;
   padding: 16px;
+  margin-top: 8px;
 
   * {
     color: ${({ theme }) => theme.colors.common.white};

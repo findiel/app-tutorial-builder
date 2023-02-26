@@ -15,12 +15,8 @@ const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Ele
   return (
     <>
       {todos.map((todo) => (
-        <CardWrapper>
-          <StyledTodo
-            isDone={todo.isDone}
-            className={todo.isDone ? 'doneTodo' : 'todo'}
-            key={todo.id}
-          >
+        <CardWrapper key={todo.id}>
+          <StyledTodo isDone={todo.isDone} key={todo.id}>
             <p>{todo.title}</p>
           </StyledTodo>
           <div>

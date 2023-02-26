@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Wrapper, StyledTutorialTooltip, Flex, Button } from '../styles/TutorialTooltip.styled';
 
 interface TutorialTooltipProps {
@@ -28,33 +28,65 @@ function TutorialTooltip({
   nextBtnText = 'Next',
   placement = 'bottom',
 }: TutorialTooltipProps): JSX.Element {
+  const [position, setPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
   const childContainerRef = useRef<HTMLDivElement>(null);
   const tutorialTooltipRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (childContainerRef?.current && tutorialTooltipRef?.current) {
-      const { current: childCurrent } = childContainerRef;
-      const { current: tutorialTooltipCurrent } = tutorialTooltipRef;
-      const childBoundingClientRect = childCurrent.getBoundingClientRect();
-      const tutorialTooltipBoundingClientRect = tutorialTooltipCurrent.getBoundingClientRect();
+      const { current: childContainerElement } = childContainerRef;
+      const { current: tutorialTooltipElement } = tutorialTooltipRef;
+      const childBoundingClientRect = childContainerElement.getBoundingClientRect();
+      const tutorialTooltipBoundingClientRect = tutorialTooltipElement.getBoundingClientRect();
 
-      //TODO: calculate the distance from screen edges depends on width and height of the TutorialTooltip component and store it to the local state
-      // then just pass it to the StyledTutorialTooltip as props (top and left). If the content wont fit, ten move the component to the opposite side
-      // like this: left --> right, top --> bottom, right --> left, bottom --> top
       console.log('child: ', childBoundingClientRect);
       console.log('tooltip: ', tutorialTooltipBoundingClientRect);
+
+      if (placement === 'bottom') {
+        const computedChildBottomMargin = Number.parseInt(
+          window.getComputedStyle(childContainerElement.firstElementChild as HTMLElement)
+            .marginBottom
+        );
+
+        setPosition({
+          top: childBoundingClientRect.height + computedChildBottomMargin,
+          left:
+            window.screen.width - childBoundingClientRect.left >=
+            tutorialTooltipBoundingClientRect.width
+              ? 0
+              : -tutorialTooltipBoundingClientRect.width,
+        });
+      }
+
+      //TODO: work with other placements + deal with edge-cases (eg. placement === 'top', and the component is very close to the staring page - we dont want to move the component.)
+      if (placement === 'top') {
+        if (
+          window.screen.width - childBoundingClientRect.left >=
+          tutorialTooltipBoundingClientRect.width
+        ) {
+          setPosition({
+            top: -childBoundingClientRect.height,
+            left: 0,
+          });
+        } else {
+          setPosition({
+            top: -tutorialTooltipBoundingClientRect.height,
+            left: -tutorialTooltipBoundingClientRect.width,
+          });
+        }
+      }
     }
-  }, [childContainerRef, tutorialTooltipRef]);
+  }, [childContainerRef, tutorialTooltipRef, placement]);
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {<div ref={childContainerRef}>{children}</div>}
       <StyledTutorialTooltip
         ref={tutorialTooltipRef}
-        className={className}
+        className="tutorial-tooltip"
         display={active ? 'block' : 'none'}
-        top={16}
-        left={50}
+        top={position.top}
+        left={position.left}
       >
         {content?.title && <h1 className="title">{content.title}</h1>}
         {content?.text && <p className="text">{content.text}</p>}
