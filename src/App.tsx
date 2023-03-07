@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
 import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
+import { TutorialProvider } from './hooks/useTutorial';
 import logo from './logo.svg';
 
 export interface Todo {
@@ -73,33 +74,51 @@ function TodoApp(): JSX.Element {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <StyledTodoWrapper>
-          {/* <TutorialTooltip
-            // placement="top"
-            active
+        <TutorialProvider>
+          <GlobalStyles />
+          {/* <div style={{ width: 400, height: 300 }}></div>
+
+          <div style={{ width: 400, height: 300 }}></div>
+          <div style={{ width: 400, height: 300 }}></div>
+          <div style={{ width: 400, height: 300 }}></div> */}
+
+          <StyledTodoWrapper>
+            {/* <TutorialTooltip
+              active
+              content={{
+                title: 'Hello World',
+                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+              }}
+            > */}
+            <h1>TODO APP</h1>
+            {/* </TutorialTooltip> */}
+            <AddTodoForm onAddTodo={addTodoHandler} />
+            <TodoList
+              todos={todos}
+              onRemoveTodo={removeTodoHandler}
+              onToggleTodo={toggleTodoDoneHandler}
+            />
+          </StyledTodoWrapper>
+          <br />
+          <br />
+          <br />
+
+          {/* <div style={{ width: 400, height: 300 }}></div> */}
+          {/*
+          <TutorialTooltip
+            active={false}
             content={{
               title: 'Hello World',
               text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             }}
-          > */}
-          <h1>TODO APP</h1>
-          {/* </TutorialTooltip> */}
-          <AddTodoForm onAddTodo={addTodoHandler} />
-          <TodoList
-            todos={todos}
-            onRemoveTodo={removeTodoHandler}
-            onToggleTodo={toggleTodoDoneHandler}
-          />
-        </StyledTodoWrapper>
-        <br />
-        <br />
-        <br />
+          >
+            <p>Default tutorial tooltip</p>
+          </TutorialTooltip> */}
 
-        <div style={{ width: 400, height: 300 }}></div>
+          {/* <div style={{ width: 400, height: 300 }}></div> */}
 
-        {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <TutorialTooltip
+          {/* <div style={{ display: 'flex' }}> */}
+          {/* <TutorialTooltip
             active
             content={{
               title: 'Hello World',
@@ -107,48 +126,49 @@ function TodoApp(): JSX.Element {
             }}
           >
             <p>Default tutorial tooltip</p>
-          </TutorialTooltip>
-        </div> */}
+          </TutorialTooltip> */}
+          {/* </div> */}
 
-        {/* <div style={{ display: 'flex' }}> */}
-        <TutorialTooltip
-          active
-          content={{
-            title: 'Hello World',
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          }}
-        >
-          <p style={{ marginBottom: 40 }}>Default tutorial tooltip</p>
-        </TutorialTooltip>
-        {/* </div> */}
+          {/* <div style={{ width: 400, height: 300 }}></div> */}
 
-        {/* <div style={{ width: 400, height: 300 }}></div> */}
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <TutorialTooltip
+              active
+              content={{
+                title: 'Hello World',
+                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+              }}
+            >
+              <div>hello world</div>
+            </TutorialTooltip>
+          </div>
 
-        {/* <TutorialTooltip
-          active
-          content={{
-            component: (
-              <div
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}
-              >
-                <p>This is cool react logo &#128526;</p>
-                <img src={logo} alt="react logo" style={{ width: '150px', height: '150px' }} />
-              </div>
-            ),
-          }}
-        >
-          <p>Tutorial tooltip with customized content - a component</p>
-        </TutorialTooltip> */}
+          {/* <TutorialTooltip
+            active
+            content={{
+              component: (
+                <div
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}
+                >
+                  <p>This is cool react logo &#128526;</p>
+                  <img src={logo} alt="react logo" style={{ width: '150px', height: '150px' }} />
+                </div>
+              ),
+            }}
+          >
+            <p>Tutorial tooltip with customized content - a component</p>
+          </TutorialTooltip> */}
 
-        {/* <CustomizedTutorialTooltip
-          active
-          content={{
-            title: 'Hello World',
-            text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          }}
-        >
-          <p>Tutorial tooltip with customized styles</p>
-        </CustomizedTutorialTooltip> */}
+          {/* <CustomizedTutorialTooltip
+            active
+            content={{
+              title: 'Hello World',
+              text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            }}
+          >
+            <p>Tutorial tooltip with customized styles</p>
+          </CustomizedTutorialTooltip> */}
+        </TutorialProvider>
       </ThemeProvider>
     </>
   );

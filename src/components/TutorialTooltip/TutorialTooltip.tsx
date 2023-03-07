@@ -1,5 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Wrapper, StyledTutorialTooltip, Flex, Button } from '../styles/TutorialTooltip.styled';
+import {
+  Wrapper,
+  ChildElementWrapper,
+  StyledTutorialTooltip,
+  Flex,
+  Button,
+} from '../styles/TutorialTooltip.styled';
+import { useTutorialContext } from '../../hooks/useTutorial';
+import Overlay from '../Overlay';
 
 interface TutorialTooltipProps {
   children: JSX.Element;
@@ -9,7 +17,6 @@ interface TutorialTooltipProps {
   className?: string;
   skipTutorialBtnText?: string;
   nextBtnText?: string;
-  placement?: 'left' | 'top' | 'right' | 'bottom';
 }
 
 interface TutorialTooltipContent {
@@ -17,6 +24,8 @@ interface TutorialTooltipContent {
   title?: string;
   component?: JSX.Element;
 }
+
+const viewWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
 
 function TutorialTooltip({
   children,
@@ -26,8 +35,8 @@ function TutorialTooltip({
   className,
   skipTutorialBtnText = 'Skip tutorial',
   nextBtnText = 'Next',
-  placement = 'bottom',
 }: TutorialTooltipProps): JSX.Element {
+  const { nextStep } = useTutorialContext();
   const [position, setPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
   const childContainerRef = useRef<HTMLDivElement>(null);
   const tutorialTooltipRef = useRef<HTMLDivElement>(null);
@@ -39,66 +48,60 @@ function TutorialTooltip({
       const childBoundingClientRect = childContainerElement.getBoundingClientRect();
       const tutorialTooltipBoundingClientRect = tutorialTooltipElement.getBoundingClientRect();
 
-      console.log('child: ', childBoundingClientRect);
-      console.log('tooltip: ', tutorialTooltipBoundingClientRect);
+      const childComputedStyle = window.getComputedStyle(
+        childContainerElement.firstElementChild as HTMLElement
+      );
+      const childTopMargin = Number.parseInt(childComputedStyle.marginTop);
+      const childBottomMargin = Number.parseInt(childComputedStyle.marginBottom);
+      const childFullHeight = childBoundingClientRect.height + childTopMargin + childBottomMargin;
 
-      if (placement === 'bottom') {
-        const computedChildBottomMargin = Number.parseInt(
-          window.getComputedStyle(childContainerElement.firstElementChild as HTMLElement)
-            .marginBottom
-        );
+      const tutorialTooltipComputedStyle = window.getComputedStyle(
+        tutorialTooltipElement as HTMLElement
+      );
+      const tutorialTooltipTopMargin = Number.parseInt(tutorialTooltipComputedStyle.marginTop);
+      const tutorialTooltipRightMargin = Number.parseInt(tutorialTooltipComputedStyle.marginRight);
+      const tutorialTooltipLeftMargin = Number.parseInt(tutorialTooltipComputedStyle.marginLeft);
+      const tutorialTooltipFullWidth =
+        tutorialTooltipBoundingClientRect.width +
+        tutorialTooltipLeftMargin +
+        tutorialTooltipRightMargin;
 
-        setPosition({
-          top: childBoundingClientRect.height + computedChildBottomMargin,
-          left:
-            window.screen.width - childBoundingClientRect.left >=
-            tutorialTooltipBoundingClientRect.width
-              ? 0
-              : -tutorialTooltipBoundingClientRect.width,
-        });
-      }
-
-      //TODO: work with other placements + deal with edge-cases (eg. placement === 'top', and the component is very close to the staring page - we dont want to move the component.)
-      if (placement === 'top') {
-        if (
-          window.screen.width - childBoundingClientRect.left >=
-          tutorialTooltipBoundingClientRect.width
-        ) {
-          setPosition({
-            top: -childBoundingClientRect.height,
-            left: 0,
-          });
-        } else {
-          setPosition({
-            top: -tutorialTooltipBoundingClientRect.height,
-            left: -tutorialTooltipBoundingClientRect.width,
-          });
-        }
-      }
+      setPosition({
+        top: childFullHeight + tutorialTooltipTopMargin,
+        left:
+          viewWidth - childBoundingClientRect.left >= tutorialTooltipFullWidth
+            ? 0
+            : -tutorialTooltipBoundingClientRect.width - tutorialTooltipRightMargin,
+      });
     }
-  }, [childContainerRef, tutorialTooltipRef, placement]);
+  }, [childContainerRef, tutorialTooltipRef]);
 
   return (
-    <Wrapper className={className}>
-      {<div ref={childContainerRef}>{children}</div>}
-      <StyledTutorialTooltip
-        ref={tutorialTooltipRef}
-        className="tutorial-tooltip"
-        display={active ? 'block' : 'none'}
-        top={position.top}
-        left={position.left}
-      >
-        {content?.title && <h1 className="title">{content.title}</h1>}
-        {content?.text && <p className="text">{content.text}</p>}
-        {content?.component}
-        {!hideButtons && (
-          <Flex className="buttons-wrapper">
-            <Button className="skip-tutorial-btn">{skipTutorialBtnText}</Button>
-            <Button className="next-btn">{nextBtnText}</Button>
-          </Flex>
-        )}
-      </StyledTutorialTooltip>
-    </Wrapper>
+    <>
+      <Overlay></Overlay>
+      <Wrapper className={className}>
+        <ChildElementWrapper className="child-element-wrapper" ref={childContainerRef}>
+          {children}
+        </ChildElementWrapper>
+        <StyledTutorialTooltip
+          ref={tutorialTooltipRef}
+          className="tutorial-tooltip"
+          display={active ? 'block' : 'none'}
+          top={position.top}
+          left={position.left}
+        >
+          {content?.title && <h1 className="title">{content.title}</h1>}
+          {content?.text && <p className="text">{content.text}</p>}
+          {content?.component}
+          {!hideButtons && (
+            <Flex className="buttons-wrapper">
+              <Button className="skip-tutorial-btn">{skipTutorialBtnText}</Button>
+              <Button className="next-btn">{nextBtnText}</Button>
+            </Flex>
+          )}
+        </StyledTutorialTooltip>
+      </Wrapper>
+    </>
   );
 }
 

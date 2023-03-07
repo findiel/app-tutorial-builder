@@ -8,6 +8,13 @@ interface StyledTutorialTooltipProps {
 
 export const Wrapper = styled.div`
   position: relative;
+  z-index: 2147483647; //Max z-index value by default
+`;
+
+export const ChildElementWrapper = styled.div`
+  background-color: #ffff;
+  padding: 10px;
+  border-radius: 8px;
 `;
 
 export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
@@ -23,7 +30,6 @@ export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
   color: white;
   padding: 16px;
   margin-top: 8px;
-
   * {
     color: ${({ theme }) => theme.colors.common.white};
   }
