@@ -15,7 +15,7 @@ export const Wrapper = styled.div<Activable>`
 `;
 
 export const ChildElementWrapper = styled.div<Activable>`
-  background-color: ${({ active }) => (active ? '#ffffff' : 'inherit')};
+  background-color: ${({ theme, active }) => (active ? theme.colors.common.white : 'inherit')};
   padding: 10px;
   border-radius: 8px;
 `;
