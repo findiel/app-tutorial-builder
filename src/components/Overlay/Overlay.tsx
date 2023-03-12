@@ -1,13 +1,7 @@
-import ReactDOM from 'react-dom';
-import StyledOverLay from '../styles/Overlay.styles';
+import { StyledOverlay } from '../styles/TutorialTooltip.styled';
 
-const Overlay: React.FC = () => {
-  const styledOverLay = <StyledOverLay></StyledOverLay>;
-  const portalNode = document.getElementById('tutorial-app-overlay-portal');
-  if (portalNode) {
-    return ReactDOM.createPortal(styledOverLay, portalNode);
-  }
-  return null;
+const Overlay: React.FC = (): JSX.Element => {
+  return <StyledOverlay />;
 };
 
 export default Overlay;

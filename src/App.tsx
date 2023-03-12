@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
 import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
-import { TutorialProvider } from './hooks/useTutorial';
+import { TutorialProvider, useTutorialContext } from './hooks/useTutorial';
 import logo from './logo.svg';
 
 export interface Todo {
@@ -46,6 +46,16 @@ const CustomizedTutorialTooltip = styled(TutorialTooltip)`
   }
 `;
 
+const TutorialManagementButtons = () => {
+  const { startTutorial, resetTutorial } = useTutorialContext();
+  return (
+    <>
+      <button onClick={() => startTutorial()}>start tutorial</button>
+      <button onClick={() => resetTutorial()}>reset tutorial</button>
+    </>
+  );
+};
+
 function TodoApp(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
 
@@ -76,22 +86,18 @@ function TodoApp(): JSX.Element {
       <ThemeProvider theme={theme}>
         <TutorialProvider>
           <GlobalStyles />
-          {/* <div style={{ width: 400, height: 300 }}></div>
-
-          <div style={{ width: 400, height: 300 }}></div>
-          <div style={{ width: 400, height: 300 }}></div>
-          <div style={{ width: 400, height: 300 }}></div> */}
-
+          <TutorialManagementButtons />
           <StyledTodoWrapper>
-            {/* <TutorialTooltip
-              active
+            <TutorialTooltip
+              autostart
+              step={0}
               content={{
-                title: 'Hello World',
-                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                title: 'Welcome to TODO APP! ',
+                text: 'This application will help you with managing your tasks.',
               }}
-            > */}
-            <h1>TODO APP</h1>
-            {/* </TutorialTooltip> */}
+            >
+              <h1>TODO APP</h1>
+            </TutorialTooltip>
             <AddTodoForm onAddTodo={addTodoHandler} />
             <TodoList
               todos={todos}
@@ -99,11 +105,7 @@ function TodoApp(): JSX.Element {
               onToggleTodo={toggleTodoDoneHandler}
             />
           </StyledTodoWrapper>
-          <br />
-          <br />
-          <br />
 
-          {/* <div style={{ width: 400, height: 300 }}></div> */}
           {/*
           <TutorialTooltip
             active={false}
@@ -114,34 +116,6 @@ function TodoApp(): JSX.Element {
           >
             <p>Default tutorial tooltip</p>
           </TutorialTooltip> */}
-
-          {/* <div style={{ width: 400, height: 300 }}></div> */}
-
-          {/* <div style={{ display: 'flex' }}> */}
-          {/* <TutorialTooltip
-            active
-            content={{
-              title: 'Hello World',
-              text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-            }}
-          >
-            <p>Default tutorial tooltip</p>
-          </TutorialTooltip> */}
-          {/* </div> */}
-
-          {/* <div style={{ width: 400, height: 300 }}></div> */}
-
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <TutorialTooltip
-              active
-              content={{
-                title: 'Hello World',
-                text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-              }}
-            >
-              <div>hello world</div>
-            </TutorialTooltip>
-          </div>
 
           {/* <TutorialTooltip
             active

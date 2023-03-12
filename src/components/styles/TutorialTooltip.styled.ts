@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
 interface StyledTutorialTooltipProps {
-  display: 'block' | 'none';
+  active: boolean;
   top: number;
   left: number;
+}
+
+interface ChildElementWrapperProps {
+  active: boolean;
 }
 
 export const Wrapper = styled.div`
@@ -11,14 +15,14 @@ export const Wrapper = styled.div`
   z-index: 2147483647; //Max z-index value by default
 `;
 
-export const ChildElementWrapper = styled.div`
-  background-color: #ffff;
+export const ChildElementWrapper = styled.div<ChildElementWrapperProps>`
+  background-color: ${({ active }) => (active ? '#ffffff' : 'inherit')};
   padding: 10px;
   border-radius: 8px;
 `;
 
 export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
-  display: ${({ display }) => display};
+  display: ${({ active }) => (active ? 'block' : 'none')};
   position: absolute;
   top: ${({ top }) => top + 'px'};
   left: ${({ left }) => left + 'px'};
@@ -44,9 +48,10 @@ export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
   }
 `;
 
-export const Flex = styled.div`
+export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 24px;
 `;
 
 export const Button = styled.button`
@@ -62,4 +67,14 @@ export const Button = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.primary.light};
   }
+`;
+
+export const StyledOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2147483646; // Almost max z-index value by default
+  background-color: rgba(0, 0, 0, 0.4);
 `;

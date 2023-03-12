@@ -12,9 +12,6 @@ const theme = {
       white: '#ffffff',
     },
   },
-  spacing: {
-    unit: 8,
-  },
   components: {
     input: {
       boxShadowOnFocus: '#719ece',
