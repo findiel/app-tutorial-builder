@@ -1,21 +1,20 @@
 import styled from 'styled-components';
 
-interface StyledTutorialTooltipProps {
-  active: boolean;
+interface StyledTutorialTooltipProps extends Activable {
   top: number;
   left: number;
 }
 
-interface ChildElementWrapperProps {
+interface Activable {
   active: boolean;
 }
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<Activable>`
   position: relative;
-  z-index: 2147483647; //Max z-index value by default
+  z-index: ${({ active }) => (active ? 2147483647 : 'auto')}; //Max z-index value by default
 `;
 
-export const ChildElementWrapper = styled.div<ChildElementWrapperProps>`
+export const ChildElementWrapper = styled.div<Activable>`
   background-color: ${({ active }) => (active ? '#ffffff' : 'inherit')};
   padding: 10px;
   border-radius: 8px;
@@ -34,6 +33,7 @@ export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
   color: white;
   padding: 16px;
   margin-top: 8px;
+
   * {
     color: ${({ theme }) => theme.colors.common.white};
   }

@@ -117,7 +117,7 @@ function TutorialTooltip({
   return (
     <>
       {isCurrentTutorialStepDisplayed && <Overlay></Overlay>}
-      <Wrapper className={className}>
+      <Wrapper className={className} active={isCurrentTutorialStepDisplayed}>
         <ChildElementWrapper
           ref={childContainerRef}
           className="child-element-wrapper"
