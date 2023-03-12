@@ -54,18 +54,22 @@ export const ButtonsWrapper = styled.div`
   margin-top: 24px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<Activable>`
   padding: 8px 32px;
   border-radius: 32px;
-  border: 1px white solid;
-  color: ${({ theme }) => theme.colors.common.white};
+  border: ${({ theme, active }) =>
+    `1px ${active ? theme.colors.common.white : theme.colors.disabled.main} solid`};
+  color: ${({ theme, active }) =>
+    active ? theme.colors.common.white : theme.colors.disabled.main};
   font-size: 18px;
-  background-color: ${({ theme }) => theme.colors.primary.main};
-  cursor: pointer;
-  transition: all 0.3s;
+  background-color: ${({ theme, active }) =>
+    active ? theme.colors.primary.main : theme.colors.primary.dark};
+  cursor: ${({ active }) => (active ? 'pointer' : 'auto')};
+  transition: ${({ active }) => (active ? 'all 0.3s' : 'none')};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primary.light};
+    background-color: ${({ theme, active }) =>
+      active ? theme.colors.primary.light : theme.colors.primary.dark};
   }
 `;
 

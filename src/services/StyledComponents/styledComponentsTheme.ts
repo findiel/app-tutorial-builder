@@ -3,6 +3,7 @@ const theme = {
     primary: {
       main: '#008080',
       light: '#009999',
+      dark: '#006666',
     },
     error: {
       main: '#ff6347',
@@ -10,6 +11,9 @@ const theme = {
     common: {
       black: '#000000',
       white: '#ffffff',
+    },
+    disabled: {
+      main: '#9e9e9e',
     },
   },
   components: {

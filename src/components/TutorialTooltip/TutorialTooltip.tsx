@@ -17,21 +17,23 @@ interface TutorialTooltipProps {
   step: number;
   /* Content of current tutorial step to be displayed in tooltip **/
   content?: TutorialTooltipContent;
-  /* Decision if the buttons should be rendered **/
-  hideButtons?: boolean;
   /* The className of the component (see more details in styled-components library) **/
   className?: string;
   /* Text displayed in skip tutorial button **/
   skipTutorialBtnText?: string;
   /* Text displayed in next step button **/
   nextBtnText?: string;
-  /* Props that tells if tutorial should be started automatically.
+  /* If true, the buttons won't be rendered **/
+  hideButtons?: boolean;
+  /* If true, tutorial will start automatically.
     You could for example make this prop conditionally decide at
     what point the tutorial should start.
   **/
   autostart?: boolean;
   /* Info if this step is the last one **/
   lastStep?: boolean;
+  /* If true, the next step button will be disabled  **/
+  nextButtonDisabled?: boolean;
 }
 
 interface TutorialTooltipContent {
@@ -55,6 +57,7 @@ function TutorialTooltip({
   nextBtnText = 'Next',
   autostart = false,
   lastStep = false,
+  nextButtonDisabled = false,
 }: TutorialTooltipProps): JSX.Element {
   const {
     nextStep,
@@ -138,10 +141,15 @@ function TutorialTooltip({
           {!hideButtons && (
             <>
               <ButtonsWrapper className="buttons-wrapper">
-                <Button className="skip-tutorial-btn" onClick={endTutorial}>
+                <Button className="skip-tutorial-btn" active onClick={endTutorial}>
                   {skipTutorialBtnText}
                 </Button>
-                <Button className="next-btn" onClick={nextStep.bind(null, lastStep)}>
+                <Button
+                  className="next-btn"
+                  active={!nextButtonDisabled}
+                  onClick={nextStep.bind(null, lastStep)}
+                  disabled={nextButtonDisabled}
+                >
                   {nextBtnText}
                 </Button>
               </ButtonsWrapper>
