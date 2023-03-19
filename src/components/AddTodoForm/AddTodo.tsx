@@ -18,7 +18,7 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
   const handleAddTodo = (event: React.FormEvent) => {
     event.preventDefault();
     if (isTutorialStarted) {
-      nextStep(false);
+      nextStep();
     }
     const newTodo: Todo = {
       id: uuidv4(),

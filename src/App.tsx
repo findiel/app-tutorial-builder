@@ -1,5 +1,4 @@
 import React from 'react';
-import StyledTodoWrapper from './components/styles/TodoWrapper.styled';
 import TodoList from './components/TodoList';
 import AddTodoForm from './components/AddTodoForm';
 import GlobalStyles from './components/styles/GlobalStyles.styled';
@@ -8,7 +7,10 @@ import theme from './services/StyledComponents/styledComponentsTheme';
 import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
 import { TutorialProvider, useTutorialContext } from './hooks/useTutorial';
+import MUIDialog from './components/MUIDialog';
 import logo from './logo.svg';
+import { Grid, Typography } from '@mui/material';
+import FetchFromSwapi from './components/FetchFromSwapi';
 
 export interface Todo {
   id: string;
@@ -56,7 +58,7 @@ const TutorialManagementButtons = () => {
   );
 };
 
-function TodoApp(): JSX.Element {
+function App(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
 
   const addTodoHandler = (todo: Todo) => setTodos((prevTodos) => [...prevTodos, todo]);
@@ -87,7 +89,7 @@ function TodoApp(): JSX.Element {
         <TutorialProvider>
           <GlobalStyles />
           <TutorialManagementButtons />
-          <StyledTodoWrapper>
+          <Grid container direction="column" alignItems="center">
             <TutorialTooltip
               autostart
               step={0}
@@ -104,8 +106,17 @@ function TodoApp(): JSX.Element {
               onRemoveTodo={removeTodoHandler}
               onToggleTodo={toggleTodoDoneHandler}
             />
-          </StyledTodoWrapper>
-
+          </Grid>
+          <br />
+          <Grid container direction="column" alignItems="center">
+            <h1>Tutorial tests with MUI</h1>
+            <MUIDialog />
+          </Grid>
+          <br />
+          <Grid container direction="column" alignItems="center">
+            <h1>Fetch data & then display tutorial step</h1>
+            <FetchFromSwapi />
+          </Grid>
           {/*
           <TutorialTooltip
             active={false}
@@ -148,4 +159,4 @@ function TodoApp(): JSX.Element {
   );
 }
 
-export default TodoApp;
+export default App;

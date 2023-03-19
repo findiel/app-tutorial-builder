@@ -19,14 +19,14 @@ const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Ele
 
   const handleToggleTodo = (todoId: string) => {
     if (isTutorialStarted) {
-      nextStep(false);
+      nextStep();
     }
     onToggleTodo(todoId);
   };
 
   const handleRemoveTodo = (todoId: string) => {
     if (isTutorialStarted) {
-      nextStep(true);
+      nextStep();
     }
     onRemoveTodo(todoId);
   };
@@ -61,7 +61,6 @@ const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Ele
               <TutorialTooltip
                 step={4}
                 hideNextButton
-                lastStep
                 content={{
                   title: 'Delete functionality',
                   text: 'You could also remove your TODO.',

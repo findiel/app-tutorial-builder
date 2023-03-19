@@ -24,7 +24,7 @@ function useTutorial() {
     setActiveStep(null);
   };
 
-  const nextStep = (lastStep: boolean) => {
+  const nextStep = (lastStep = false) => {
     if (lastStep) {
       endTutorial();
     }
