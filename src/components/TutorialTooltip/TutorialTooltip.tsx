@@ -50,8 +50,6 @@ interface TutorialTooltipContent {
   component?: JSX.Element;
 }
 
-const viewWidth = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-
 function TutorialTooltip({
   children,
   step,
