@@ -5,16 +5,21 @@ import Wrapper from '../styles/Wrapper.styled';
 import Button from '../styles/Button.styled';
 import Input from '../styles/Input.styled';
 import TutorialTooltip from '../TutorialTooltip';
+import { useTutorialContext } from '../../hooks/useTutorial';
 
 interface AddTodoFormProps {
   onAddTodo: (todo: Todo) => void;
 }
 
 const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
+  const { nextStep, isTutorialStarted } = useTutorialContext();
   const [value, setValue] = React.useState<string>('');
 
   const handleAddTodo = (event: React.FormEvent) => {
     event.preventDefault();
+    if (isTutorialStarted) {
+      nextStep(false);
+    }
     const newTodo: Todo = {
       id: uuidv4(),
       title: value,
@@ -31,6 +36,7 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
     <Wrapper>
       <TutorialTooltip
         step={1}
+        nextButtonDisabled={!value}
         content={{
           title: 'Add yours first TODO',
           text: 'Just type it in the input.',
@@ -47,11 +53,11 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
       <TutorialTooltip
         step={2}
         lastStep
-        nextButtonDisabled
         content={{
           title: 'Finish adding first TODO',
           text: 'Click add button to finish adding your first TODO',
         }}
+        hideNextButton
       >
         <Button onClick={handleAddTodo} disabled={!value}>
           Add

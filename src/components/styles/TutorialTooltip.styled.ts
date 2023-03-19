@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface StyledTutorialTooltipProps extends Activable {
   top: number;
   left: number;
+  width?: number;
 }
 
 interface Activable {
@@ -27,6 +28,8 @@ export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
   left: ${({ left }) => left + 'px'};
   min-width: 300px;
   max-width: 500px;
+  box-sizing: border-box;
+  width: ${({ width }) => (width ? width + 'px' : 'auto')};
   background-color: ${({ theme }) => theme.colors.primary.main};
   color: ${({ theme }) => theme.colors.common.white};
   border-radius: 16px;

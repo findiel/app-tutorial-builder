@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useLayoutEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   Wrapper,
   ChildElementWrapper,
@@ -9,6 +9,7 @@ import {
 import { useTutorialContext } from '../../hooks/useTutorial';
 import Overlay from '../Overlay';
 import storage, { TutorialStatus } from '../utils/storage';
+import usePosition from '../../hooks/usePosition';
 
 interface TutorialTooltipProps {
   /* Element to be exposed **/
@@ -23,17 +24,21 @@ interface TutorialTooltipProps {
   skipTutorialBtnText?: string;
   /* Text displayed in next step button **/
   nextBtnText?: string;
-  /* If true, the buttons won't be rendered **/
-  hideButtons?: boolean;
   /* If true, tutorial will start automatically.
-    You could for example make this prop conditionally decide at
-    what point the tutorial should start.
+  You could for example make this prop conditionally decide at
+  what point the tutorial should start.
   **/
   autostart?: boolean;
   /* Info if this step is the last one **/
   lastStep?: boolean;
   /* If true, the next step button will be disabled  **/
   nextButtonDisabled?: boolean;
+  /* If true, the buttons won't be rendered **/
+  hideButtons?: boolean;
+  /* If true, next step button won't be rendered **/
+  hideNextButton?: boolean;
+  /* If true, skip tutorial button won't be rendered **/
+  hideSkipTutorialButton?: boolean;
 }
 
 interface TutorialTooltipContent {
@@ -51,13 +56,15 @@ function TutorialTooltip({
   children,
   step,
   content,
-  hideButtons = false,
   className,
   skipTutorialBtnText = 'Skip tutorial',
   nextBtnText = 'Next',
   autostart = false,
   lastStep = false,
   nextButtonDisabled = false,
+  hideButtons = false,
+  hideNextButton = false,
+  hideSkipTutorialButton = false,
 }: TutorialTooltipProps): JSX.Element {
   const {
     nextStep,
@@ -67,9 +74,13 @@ function TutorialTooltip({
     isTutorialStarted,
     endTutorial,
   } = useTutorialContext();
-  const [position, setPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
   const childContainerRef = useRef<HTMLDivElement>(null);
   const tutorialTooltipRef = useRef<HTMLDivElement>(null);
+  const { position, computedWidth } = usePosition(
+    childContainerRef,
+    tutorialTooltipRef,
+    activeStep
+  );
 
   useEffect(() => {
     const tutorialStatus = storage.getTutorialStatus();
@@ -83,34 +94,6 @@ function TutorialTooltip({
       storage.storeTutorialStatus(TutorialStatus.PLAYING);
     }
   }, [setIsTutorialStarted, autostart, isTutorialStarted, step, setActiveStep]);
-
-  useLayoutEffect(() => {
-    if (childContainerRef?.current && tutorialTooltipRef?.current) {
-      const { current: childContainerElement } = childContainerRef;
-      const { current: tutorialTooltipElement } = tutorialTooltipRef;
-      const childBoundingClientRect = childContainerElement.getBoundingClientRect();
-      const tutorialTooltipBoundingClientRect = tutorialTooltipElement.getBoundingClientRect();
-
-      const tutorialTooltipComputedStyle = window.getComputedStyle(
-        tutorialTooltipElement as HTMLElement
-      );
-      const tutorialTooltipTopMargin = Number.parseInt(tutorialTooltipComputedStyle.marginTop);
-      const tutorialTooltipRightMargin = Number.parseInt(tutorialTooltipComputedStyle.marginRight);
-      const tutorialTooltipLeftMargin = Number.parseInt(tutorialTooltipComputedStyle.marginLeft);
-      const tutorialTooltipFullWidth =
-        tutorialTooltipBoundingClientRect.width +
-        tutorialTooltipLeftMargin +
-        tutorialTooltipRightMargin;
-
-      setPosition({
-        top: childBoundingClientRect.height + tutorialTooltipTopMargin,
-        left:
-          viewWidth - childBoundingClientRect.left >= tutorialTooltipFullWidth
-            ? 0
-            : -tutorialTooltipBoundingClientRect.width - tutorialTooltipRightMargin,
-      });
-    }
-  }, [childContainerRef, tutorialTooltipRef, activeStep]);
 
   const isCurrentTutorialStepDisplayed = React.useMemo(
     () => activeStep === step && isTutorialStarted,
@@ -134,6 +117,7 @@ function TutorialTooltip({
           active={isCurrentTutorialStepDisplayed}
           top={position.top}
           left={position.left}
+          width={computedWidth}
         >
           {content?.title && <h1 className="title">{content.title}</h1>}
           {content?.text && <p className="text">{content.text}</p>}
@@ -141,17 +125,21 @@ function TutorialTooltip({
           {!hideButtons && (
             <>
               <ButtonsWrapper className="buttons-wrapper">
-                <Button className="skip-tutorial-btn" active onClick={endTutorial}>
-                  {skipTutorialBtnText}
-                </Button>
-                <Button
-                  className="next-btn"
-                  active={!nextButtonDisabled}
-                  onClick={nextStep.bind(null, lastStep)}
-                  disabled={nextButtonDisabled}
-                >
-                  {nextBtnText}
-                </Button>
+                {!hideSkipTutorialButton && (
+                  <Button className="skip-tutorial-btn" active onClick={endTutorial}>
+                    {skipTutorialBtnText}
+                  </Button>
+                )}
+                {!hideNextButton && (
+                  <Button
+                    className="next-btn"
+                    active={!nextButtonDisabled}
+                    onClick={nextStep.bind(null, lastStep)}
+                    disabled={nextButtonDisabled}
+                  >
+                    {nextBtnText}
+                  </Button>
+                )}
               </ButtonsWrapper>
             </>
           )}
