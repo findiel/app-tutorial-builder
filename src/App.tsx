@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { TutorialProvider, useTutorialContext } from './hooks/useTutorial';
 import MUIDialog from './components/MUIDialog';
 import logo from './logo.svg';
-import { Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import FetchFromSwapi from './components/FetchFromSwapi';
 
 export interface Todo {
