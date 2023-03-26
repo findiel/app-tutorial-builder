@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyledOverlay } from '../../styles/TutorialTooltip.styled';
 
 const Overlay: React.FC = (): JSX.Element => {

@@ -1,3 +1,5 @@
+
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import appTutorialTheme from '../../services/styled-components/theme';
 import { TutorialProvider } from '../../hooks/useTutorial';
