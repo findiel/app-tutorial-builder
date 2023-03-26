@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoList from './components/TodoList';
 import AddTodoForm from './components/AddTodoForm';
-import GlobalStyles from './components/styles/GlobalStyles.styled';
+import GlobalStyles from './styles/GlobalStyles.styled';
 import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
 import TutorialTooltip from './components/TutorialTooltip';

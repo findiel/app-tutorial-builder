@@ -1,4 +1,4 @@
-import StyledFlex from '../styles/Flex.styled';
+import StyledFlex from '../../styles/Flex.styled';
 
 interface FlexProps {
   children: JSX.Element | JSX.Element[];
