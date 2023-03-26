@@ -1,5 +1,5 @@
 import TutorialTooltip from '../TutorialTooltip';
-import { Grid, Button } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useTutorialContext } from '../../hooks/useTutorial';
 
@@ -56,7 +56,7 @@ export default function FetchFromSwapiComponent() {
       <br />
       <Grid container justifyContent="center" spacing={1}>
         <Grid item>
-          <p>Fetched data: </p>
+          <Typography sx={{ paddingTop: '10px' }}>Fetched data: </Typography>
         </Grid>
         <Grid item>
           {fetchedData ? (
@@ -68,10 +68,10 @@ export default function FetchFromSwapiComponent() {
                 text: 'As you can see, here you have a fetched data.',
               }}
             >
-              <p>{fetchedData.name}</p>
+              <Typography>{fetchedData.name}</Typography>
             </TutorialTooltip>
           ) : (
-            <p>-</p>
+            <Typography sx={{ paddingTop: '10px' }}>-</Typography>
           )}
         </Grid>
       </Grid>

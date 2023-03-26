@@ -6,11 +6,12 @@ import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
 import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
-import { TutorialProvider, useTutorialContext } from './hooks/useTutorial';
+import { TutorialProvider } from './hooks/useTutorial';
 import MUIDialog from './components/MUIDialog';
 import logo from './logo.svg';
-import { Grid } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import FetchFromSwapi from './components/FetchFromSwapi';
+import TutorialManagementButtons from './components/TutorialManagementButtons';
 
 export interface Todo {
   id: string;
@@ -47,16 +48,6 @@ const CustomizedTutorialTooltip = styled(TutorialTooltip)`
     font-weight: bold;
   }
 `;
-
-const TutorialManagementButtons = () => {
-  const { startTutorial, resetTutorial } = useTutorialContext();
-  return (
-    <>
-      <button onClick={() => startTutorial()}>start tutorial</button>
-      <button onClick={() => resetTutorial()}>reset tutorial</button>
-    </>
-  );
-};
 
 function App(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
