@@ -11,7 +11,7 @@ import Overlay from '../Overlay';
 import storage, { TutorialStatus } from '../../utils/storage';
 import usePosition from '../../hooks/usePosition';
 
-interface TutorialTooltipProps {
+export interface TutorialTooltipProps {
   /* Element to be exposed **/
   children: JSX.Element;
   /* Current tutorial step **/
@@ -41,7 +41,7 @@ interface TutorialTooltipProps {
   hideSkipTutorialButton?: boolean;
 }
 
-interface TutorialTooltipContent {
+export interface TutorialTooltipContent {
   /* Tutorial step text **/
   text?: string;
   /* Tutorial step title **/

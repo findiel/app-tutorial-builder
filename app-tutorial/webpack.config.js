@@ -3,9 +3,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/app-tutorial.ts',
   output: {
-    filename: 'index.js',
+    filename: 'app-tutorial.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'app-tutorial',
     libraryTarget: 'commonjs',

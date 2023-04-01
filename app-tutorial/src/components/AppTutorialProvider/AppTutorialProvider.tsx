@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import appTutorialTheme from '../../services/styled-components/theme';
 import { TutorialProvider } from '../../hooks/useTutorial';
 
-interface AppTutorialProviderProps {
+export interface AppTutorialProviderProps {
   /** Component to be wrapped with <TutorialProvider />.
    * Usually you want to wrap whole Application by this provider */
   children: JSX.Element | JSX.Element[];

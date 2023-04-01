@@ -2,9 +2,11 @@
   "name": "app-tutorial",
   "version": "1.0.0",
   "description": "app-tutorial is a library which will help you with creating a demo for your application.",
-  "main": "dist/index.js",
+  "main": "dist/app-tutorial.js",
+  "types": "dist/types/app-tutorial.d.ts",
+  "typings": "dist/app-tutorial.d.ts",
   "files": [
-    "dist"
+    "dist/*"
   ],
   "scripts": {
     "build": "webpack --mode production",

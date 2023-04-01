@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-interface StyledTutorialTooltipProps extends Activable {
+export interface StyledTutorialTooltipProps extends Activable {
   top: number;
   left: number;
   width?: number;
 }
 
-interface Activable {
+export interface Activable {
   active: boolean;
 }
 
