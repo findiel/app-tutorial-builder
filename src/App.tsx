@@ -53,7 +53,7 @@ const CustomizedTutorialTooltip = styled(TutorialTooltip)`
 function App(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
 
-  console.log(AppTutorial.colors);
+  console.log(AppTutorial);
 
   const addTodoHandler = (todo: Todo) => setTodos((prevTodos) => [...prevTodos, todo]);
 
