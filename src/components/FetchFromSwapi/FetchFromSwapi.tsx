@@ -1,7 +1,8 @@
-import TutorialTooltip from '../TutorialTooltip';
 import { Grid, Button, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useTutorialContext } from '../../hooks/useTutorial';
+// import TutorialTooltip from '../TutorialTooltip';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 
 interface PersonDTO {
   name: string;

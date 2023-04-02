@@ -1,12 +1,13 @@
 import React from 'react';
 import { Todo } from '../../App';
-import { useTutorialContext } from '../../hooks/useTutorial';
-import CardWrapper from '../styles/CardWrapper.styled';
-import RemoveButton from '../styles/RemoveButton.styled';
-import SetDoneButton from '../styles/SetDoneButton.styled';
-import StyledTodo from '../styles/Todo.styled';
-import TutorialTooltip from '../TutorialTooltip';
+import CardWrapper from '../../styles/CardWrapper.styled';
+import RemoveButton from '../../styles/RemoveButton.styled';
+import SetDoneButton from '../../styles/SetDoneButton.styled';
+import StyledTodo from '../../styles/Todo.styled';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+// import TutorialTooltip from '../TutorialTooltip';
 import Flex from '../Flex';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 
 interface TodoListProps {
   todos: Todo[];

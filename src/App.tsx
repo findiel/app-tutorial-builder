@@ -1,17 +1,18 @@
 import React from 'react';
 import TodoList from './components/TodoList';
 import AddTodoForm from './components/AddTodoForm';
-import GlobalStyles from './components/styles/GlobalStyles.styled';
+import GlobalStyles from './styles/GlobalStyles.styled';
 import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
-import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
-import { TutorialProvider } from './hooks/useTutorial';
 import MUIDialog from './components/MUIDialog';
 import logo from './logo.svg';
 import { Grid, Button } from '@mui/material';
 import FetchFromSwapi from './components/FetchFromSwapi';
 import TutorialManagementButtons from './components/TutorialManagementButtons';
+// import { TutorialProvider } from './hooks/useTutorial';
+// import TutorialTooltip from './components/TutorialTooltip';
+import { AppTutorialProvider, TutorialTooltip } from 'app-tutorial';
 
 export interface Todo {
   id: string;
@@ -77,7 +78,7 @@ function App(): JSX.Element {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <TutorialProvider>
+        <AppTutorialProvider>
           <GlobalStyles />
           <TutorialManagementButtons />
           <Grid container direction="column" alignItems="center">
@@ -144,7 +145,7 @@ function App(): JSX.Element {
           >
             <p>Tutorial tooltip with customized styles</p>
           </CustomizedTutorialTooltip> */}
-        </TutorialProvider>
+        </AppTutorialProvider>
       </ThemeProvider>
     </>
   );

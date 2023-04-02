@@ -7,9 +7,10 @@ import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
-import TutorialTooltip from '../TutorialTooltip';
 import { Grid, Box } from '@mui/material';
-import { useTutorialContext } from '../../hooks/useTutorial';
+// import TutorialTooltip from '../TutorialTooltip';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 

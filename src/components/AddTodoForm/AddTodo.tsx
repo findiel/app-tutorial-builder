@@ -1,12 +1,12 @@
 import React from 'react';
 import { Todo } from '../../App';
 import { v4 as uuidv4 } from 'uuid';
-import Wrapper from '../styles/Wrapper.styled';
-import Button from '../styles/Button.styled';
-import Input from '../styles/Input.styled';
-import TutorialTooltip from '../TutorialTooltip';
-import { useTutorialContext } from '../../hooks/useTutorial';
-
+import Wrapper from '../../styles/Wrapper.styled';
+import Button from '../../styles/Button.styled';
+import Input from '../../styles/Input.styled';
+// import TutorialTooltip from '../TutorialTooltip';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 interface AddTodoFormProps {
   onAddTodo: (todo: Todo) => void;
 }

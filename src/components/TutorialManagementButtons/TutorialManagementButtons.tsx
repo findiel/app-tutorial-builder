@@ -1,5 +1,6 @@
 import { Grid, Button } from '@mui/material';
-import { useTutorialContext } from '../../hooks/useTutorial';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+import { useTutorialContext } from 'app-tutorial';
 
 const TutorialManagementButtons = () => {
   const { startTutorial, resetTutorial } = useTutorialContext();
