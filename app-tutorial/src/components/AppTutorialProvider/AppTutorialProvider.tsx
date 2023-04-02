@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import appTutorialTheme from '../../services/styled-components/theme';
@@ -15,9 +14,12 @@ export interface AppTutorialProviderProps {
   theme?: object;
 }
 
-export default function AppTutorialProvider({ children }: AppTutorialProviderProps): JSX.Element {
+export default function AppTutorialProvider({
+  children,
+  theme = appTutorialTheme,
+}: AppTutorialProviderProps): JSX.Element {
   return (
-    <ThemeProvider theme={appTutorialTheme}>
+    <ThemeProvider theme={theme}>
       <TutorialProvider>{children}</TutorialProvider>
     </ThemeProvider>
   );

@@ -9,4 +9,4 @@ export interface AppTutorialProviderProps {
      * https://styled-components.com/docs/advanced */
     theme?: object;
 }
-export default function AppTutorialProvider({ children }: AppTutorialProviderProps): JSX.Element;
+export default function AppTutorialProvider({ children, theme, }: AppTutorialProviderProps): JSX.Element;

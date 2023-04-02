@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import TutorialTooltip from '../TutorialTooltip';
 import { Grid, Box } from '@mui/material';
 import { useTutorialContext } from '../../hooks/useTutorial';
+import AppTutorial from 'app-tutorial';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -20,7 +21,7 @@ export interface SimpleDialogProps {
 }
 
 function SimpleDialog(props: SimpleDialogProps) {
-  const { isTutorialStarted, nextStep } = useTutorialContext();
+  const { isTutorialStarted, nextStep } = AppTutorial.useTutorialContext();
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -49,7 +50,7 @@ function SimpleDialog(props: SimpleDialogProps) {
           return (
             <Box key={email}>
               {isTutorialStarted && index === 0 ? (
-                <TutorialTooltip
+                <AppTutorial.TutorialTooltip
                   step={6}
                   hideNextButton
                   content={{
@@ -58,7 +59,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                   }}
                 >
                   {emailListItem}
-                </TutorialTooltip>
+                </AppTutorial.TutorialTooltip>
               ) : (
                 <>{emailListItem}</>
               )}
@@ -98,7 +99,7 @@ export default function SimpleDialogDemo() {
         Selected: {selectedValue}
       </Typography>
       <br />
-      <TutorialTooltip
+      <AppTutorial.TutorialTooltip
         step={5}
         hideNextButton
         content={{
@@ -109,7 +110,7 @@ export default function SimpleDialogDemo() {
         <Button variant="outlined" onClick={handleClickOpen}>
           Open simple dialog
         </Button>
-      </TutorialTooltip>
+      </AppTutorial.TutorialTooltip>
       <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
     </Grid>
   );

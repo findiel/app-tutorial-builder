@@ -1,27 +1,19 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var theme = {
     colors: {
         primary: {
             main: '#008080',
             light: '#009999',
-            dark: '#006666'
-        },
-        error: {
-            main: '#ff6347'
+            dark: '#006666',
         },
         common: {
             black: '#000000',
-            white: '#ffffff'
+            white: '#ffffff',
         },
         disabled: {
-            main: '#9e9e9e'
-        }
+            main: '#9e9e9e',
+        },
     },
-    components: {
-        input: {
-            boxShadowOnFocus: '#719ece'
-        }
-    }
 };
-exports["default"] = theme;
+exports.default = theme;

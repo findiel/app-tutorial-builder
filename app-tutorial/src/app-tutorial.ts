@@ -1,6 +1,7 @@
 import AppTutorialProvider from './components/AppTutorialProvider';
 import theme from './services/styled-components/theme';
 import TutorialTooltip from './components/TutorialTooltip';
+import { useTutorialContext } from './hooks/useTutorial';
 
 // Types
 import { AppTutorialProviderProps } from './components/AppTutorialProvider/AppTutorialProvider';
@@ -10,6 +11,7 @@ import { TutorialStatus } from './utils/storage';
 
 const module = {
   AppTutorialProvider,
+  useTutorialContext,
   TutorialTooltip,
   theme,
 };

@@ -25,7 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.useTutorialContext = exports.TutorialProvider = void 0;
 var react_1 = require("react");
 var constate_1 = __importDefault(require("constate"));
@@ -36,17 +36,17 @@ function useTutorial() {
     var startTutorial = function (step) {
         if (step === void 0) { step = 0; }
         setIsTutorialStarted(true);
-        storage_1["default"].storeTutorialStatus(storage_1.TutorialStatus.PLAYING);
+        storage_1.default.storeTutorialStatus(storage_1.TutorialStatus.PLAYING);
         setActiveStep(step);
     };
     var endTutorial = function () {
         setIsTutorialStarted(false);
-        storage_1["default"].storeTutorialStatus(storage_1.TutorialStatus.DONE);
+        storage_1.default.storeTutorialStatus(storage_1.TutorialStatus.DONE);
         setActiveStep(null);
     };
     var resetTutorial = function () {
         setIsTutorialStarted(false);
-        storage_1["default"].clearTutorialStatus();
+        storage_1.default.clearTutorialStatus();
         setActiveStep(null);
     };
     var nextStep = function (lastStep) {
@@ -64,9 +64,9 @@ function useTutorial() {
         setIsTutorialStarted: setIsTutorialStarted,
         startTutorial: startTutorial,
         endTutorial: endTutorial,
-        resetTutorial: resetTutorial
+        resetTutorial: resetTutorial,
     };
 }
-var _a = (0, constate_1["default"])(useTutorial), TutorialProvider = _a[0], useTutorialContext = _a[1];
+var _a = (0, constate_1.default)(useTutorial), TutorialProvider = _a[0], useTutorialContext = _a[1];
 exports.TutorialProvider = TutorialProvider;
 exports.useTutorialContext = useTutorialContext;

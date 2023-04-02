@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 function usePosition(childContainerRef, tutorialTooltipRef, activeStep) {
     var _a = (0, react_1.useState)({ top: 0, left: 0 }), position = _a[0], setPosition = _a[1];
@@ -25,7 +25,7 @@ function usePosition(childContainerRef, tutorialTooltipRef, activeStep) {
                     setComputedWidth(viewWidth - (tutorialTooltipLeftMargin + tutorialTooltipRightMargin));
                     setPosition({
                         top: childBoundingClientRect.height + tutorialTooltipTopMargin,
-                        left: -childBoundingClientRect.left
+                        left: -childBoundingClientRect.left,
                     });
                 }
                 else {
@@ -33,7 +33,7 @@ function usePosition(childContainerRef, tutorialTooltipRef, activeStep) {
                         top: childBoundingClientRect.height + tutorialTooltipTopMargin,
                         left: viewWidth - childBoundingClientRect.left >= tutorialTooltipFullWidth
                             ? 0
-                            : -tutorialTooltipBoundingClientRect.width - tutorialTooltipRightMargin
+                            : -tutorialTooltipBoundingClientRect.width - tutorialTooltipRightMargin,
                     });
                 }
             }
@@ -46,7 +46,7 @@ function usePosition(childContainerRef, tutorialTooltipRef, activeStep) {
     }, [childContainerRef, tutorialTooltipRef, activeStep]);
     return {
         position: position,
-        computedWidth: computedWidth
+        computedWidth: computedWidth,
     };
 }
-exports["default"] = usePosition;
+exports.default = usePosition;

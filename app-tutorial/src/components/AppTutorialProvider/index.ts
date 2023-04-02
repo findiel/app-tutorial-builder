@@ -1,1 +1,1 @@
-export {default} from './AppTutorialProvider';
+export { default } from './AppTutorialProvider';

@@ -6,13 +6,13 @@ import Button from '../../styles/Button.styled';
 import Input from '../../styles/Input.styled';
 import TutorialTooltip from '../TutorialTooltip';
 import { useTutorialContext } from '../../hooks/useTutorial';
-
+import AppTutorial from 'app-tutorial';
 interface AddTodoFormProps {
   onAddTodo: (todo: Todo) => void;
 }
 
 const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
-  const { nextStep, isTutorialStarted } = useTutorialContext();
+  const { nextStep, isTutorialStarted } = AppTutorial.useTutorialContext();
   const [value, setValue] = React.useState<string>('');
 
   const handleAddTodo = (event: React.FormEvent) => {
@@ -34,7 +34,7 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
 
   return (
     <Wrapper>
-      <TutorialTooltip
+      <AppTutorial.TutorialTooltip
         step={1}
         nextButtonDisabled={!value}
         content={{
@@ -49,8 +49,8 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
           onChange={handleChange}
           placeholder="Add todo "
         />
-      </TutorialTooltip>
-      <TutorialTooltip
+      </AppTutorial.TutorialTooltip>
+      <AppTutorial.TutorialTooltip
         step={2}
         lastStep
         content={{
@@ -62,7 +62,7 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
         <Button onClick={handleAddTodo} disabled={!value}>
           Add
         </Button>
-      </TutorialTooltip>
+      </AppTutorial.TutorialTooltip>
     </Wrapper>
   );
 };

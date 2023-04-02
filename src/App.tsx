@@ -6,12 +6,13 @@ import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
 import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
-import { TutorialProvider } from './hooks/useTutorial';
+// import { TutorialProvider } from './hooks/useTutorial';
 import MUIDialog from './components/MUIDialog';
 import logo from './logo.svg';
 import { Grid, Button } from '@mui/material';
 import FetchFromSwapi from './components/FetchFromSwapi';
 import TutorialManagementButtons from './components/TutorialManagementButtons';
+import AppTutorial from 'app-tutorial';
 
 export interface Todo {
   id: string;
@@ -52,6 +53,8 @@ const CustomizedTutorialTooltip = styled(TutorialTooltip)`
 function App(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
 
+  console.log(AppTutorial.colors);
+
   const addTodoHandler = (todo: Todo) => setTodos((prevTodos) => [...prevTodos, todo]);
 
   const removeTodoHandler = (todoId: string) => {
@@ -77,11 +80,11 @@ function App(): JSX.Element {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <TutorialProvider>
+        <AppTutorial.AppTutorialProvider>
           <GlobalStyles />
           <TutorialManagementButtons />
           <Grid container direction="column" alignItems="center">
-            <TutorialTooltip
+            <AppTutorial.TutorialTooltip
               autostart
               step={0}
               content={{
@@ -90,7 +93,7 @@ function App(): JSX.Element {
               }}
             >
               <h1>TODO APP</h1>
-            </TutorialTooltip>
+            </AppTutorial.TutorialTooltip>
             <AddTodoForm onAddTodo={addTodoHandler} />
             <TodoList
               todos={todos}
@@ -144,7 +147,7 @@ function App(): JSX.Element {
           >
             <p>Tutorial tooltip with customized styles</p>
           </CustomizedTutorialTooltip> */}
-        </TutorialProvider>
+        </AppTutorial.AppTutorialProvider>
       </ThemeProvider>
     </>
   );

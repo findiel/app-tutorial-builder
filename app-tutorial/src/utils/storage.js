@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.TutorialStatus = void 0;
 var TutorialStatus;
 (function (TutorialStatus) {
@@ -27,6 +27,6 @@ var clearTutorialStatus = function () {
 var storage = {
     storeTutorialStatus: storeTutorialStatus,
     getTutorialStatus: getTutorialStatus,
-    clearTutorialStatus: clearTutorialStatus
+    clearTutorialStatus: clearTutorialStatus,
 };
-exports["default"] = storage;
+exports.default = storage;

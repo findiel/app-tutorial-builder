@@ -1,6 +1,6 @@
 {
   "name": "app-tutorial",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "app-tutorial is a library which will help you with creating a demo for your application.",
   "main": "dist/app-tutorial.js",
   "types": "dist/types/app-tutorial.d.ts",
@@ -11,13 +11,18 @@
   "scripts": {
     "build": "webpack --mode production",
     "build:watch": "webpack --watch",
-    "build:dev": "webpack --mode development --watch"
+    "build:dev": "webpack --mode development --watch",
+    "tsc:declarations": "tsc --esModuleInterop src/app-tutorial.ts --declaration --jsx react"
   },
   "keywords": [
     "tutorial",
     "demo",
     "app-tutorial",
-    "app-demo"
+    "app-demo",
+    "app tutorial",
+    "app demo",
+    "application demo",
+    "application tutorial"
   ],
   "author": "fjollsfinn",
   "license": "ISC",
