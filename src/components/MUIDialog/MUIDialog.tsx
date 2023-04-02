@@ -7,10 +7,10 @@ import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import Typography from '@mui/material/Typography';
-import TutorialTooltip from '../TutorialTooltip';
 import { Grid, Box } from '@mui/material';
-import { useTutorialContext } from '../../hooks/useTutorial';
-import AppTutorial from 'app-tutorial';
+// import TutorialTooltip from '../TutorialTooltip';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -21,7 +21,7 @@ export interface SimpleDialogProps {
 }
 
 function SimpleDialog(props: SimpleDialogProps) {
-  const { isTutorialStarted, nextStep } = AppTutorial.useTutorialContext();
+  const { isTutorialStarted, nextStep } = useTutorialContext();
   const { onClose, selectedValue, open } = props;
 
   const handleClose = () => {
@@ -50,7 +50,7 @@ function SimpleDialog(props: SimpleDialogProps) {
           return (
             <Box key={email}>
               {isTutorialStarted && index === 0 ? (
-                <AppTutorial.TutorialTooltip
+                <TutorialTooltip
                   step={6}
                   hideNextButton
                   content={{
@@ -59,7 +59,7 @@ function SimpleDialog(props: SimpleDialogProps) {
                   }}
                 >
                   {emailListItem}
-                </AppTutorial.TutorialTooltip>
+                </TutorialTooltip>
               ) : (
                 <>{emailListItem}</>
               )}
@@ -99,7 +99,7 @@ export default function SimpleDialogDemo() {
         Selected: {selectedValue}
       </Typography>
       <br />
-      <AppTutorial.TutorialTooltip
+      <TutorialTooltip
         step={5}
         hideNextButton
         content={{
@@ -110,7 +110,7 @@ export default function SimpleDialogDemo() {
         <Button variant="outlined" onClick={handleClickOpen}>
           Open simple dialog
         </Button>
-      </AppTutorial.TutorialTooltip>
+      </TutorialTooltip>
       <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
     </Grid>
   );

@@ -8,7 +8,7 @@ module.exports = {
     filename: 'app-tutorial.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'app-tutorial',
-    libraryTarget: 'commonjs',
+    libraryTarget: 'umd',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

@@ -1,8 +1,8 @@
-import TutorialTooltip from '../TutorialTooltip';
 import { Grid, Button, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useTutorialContext } from '../../hooks/useTutorial';
-import AppTutorial from 'app-tutorial';
+// import TutorialTooltip from '../TutorialTooltip';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 
 interface PersonDTO {
   name: string;
@@ -24,7 +24,7 @@ interface PersonDTO {
 }
 
 export default function FetchFromSwapiComponent() {
-  const { isTutorialStarted, nextStep } = AppTutorial.useTutorialContext();
+  const { isTutorialStarted, nextStep } = useTutorialContext();
   const [fetchedData, setFetchedData] = useState<PersonDTO | null>(null);
 
   const fetchData = async () => {
@@ -42,7 +42,7 @@ export default function FetchFromSwapiComponent() {
 
   return (
     <>
-      <AppTutorial.TutorialTooltip
+      <TutorialTooltip
         step={7}
         hideNextButton
         content={{
@@ -53,7 +53,7 @@ export default function FetchFromSwapiComponent() {
         <Button variant="outlined" onClick={fetchData}>
           Fetch data from SWAPI
         </Button>
-      </AppTutorial.TutorialTooltip>
+      </TutorialTooltip>
       <br />
       <Grid container justifyContent="center" spacing={1}>
         <Grid item>
@@ -61,7 +61,7 @@ export default function FetchFromSwapiComponent() {
         </Grid>
         <Grid item>
           {fetchedData ? (
-            <AppTutorial.TutorialTooltip
+            <TutorialTooltip
               step={8}
               lastStep
               content={{
@@ -70,7 +70,7 @@ export default function FetchFromSwapiComponent() {
               }}
             >
               <Typography>{fetchedData.name}</Typography>
-            </AppTutorial.TutorialTooltip>
+            </TutorialTooltip>
           ) : (
             <Typography sx={{ paddingTop: '10px' }}>-</Typography>
           )}

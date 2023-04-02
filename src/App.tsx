@@ -4,15 +4,15 @@ import AddTodoForm from './components/AddTodoForm';
 import GlobalStyles from './styles/GlobalStyles.styled';
 import { ThemeProvider } from 'styled-components';
 import theme from './services/StyledComponents/styledComponentsTheme';
-import TutorialTooltip from './components/TutorialTooltip';
 import styled from 'styled-components';
-// import { TutorialProvider } from './hooks/useTutorial';
 import MUIDialog from './components/MUIDialog';
 import logo from './logo.svg';
 import { Grid, Button } from '@mui/material';
 import FetchFromSwapi from './components/FetchFromSwapi';
 import TutorialManagementButtons from './components/TutorialManagementButtons';
-import AppTutorial from 'app-tutorial';
+// import { TutorialProvider } from './hooks/useTutorial';
+// import TutorialTooltip from './components/TutorialTooltip';
+import { AppTutorialProvider, TutorialTooltip } from 'app-tutorial';
 
 export interface Todo {
   id: string;
@@ -53,8 +53,6 @@ const CustomizedTutorialTooltip = styled(TutorialTooltip)`
 function App(): JSX.Element {
   const [todos, setTodos] = React.useState<Todo[] | []>([]);
 
-  console.log(AppTutorial);
-
   const addTodoHandler = (todo: Todo) => setTodos((prevTodos) => [...prevTodos, todo]);
 
   const removeTodoHandler = (todoId: string) => {
@@ -80,11 +78,11 @@ function App(): JSX.Element {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <AppTutorial.AppTutorialProvider>
+        <AppTutorialProvider>
           <GlobalStyles />
           <TutorialManagementButtons />
           <Grid container direction="column" alignItems="center">
-            <AppTutorial.TutorialTooltip
+            <TutorialTooltip
               autostart
               step={0}
               content={{
@@ -93,7 +91,7 @@ function App(): JSX.Element {
               }}
             >
               <h1>TODO APP</h1>
-            </AppTutorial.TutorialTooltip>
+            </TutorialTooltip>
             <AddTodoForm onAddTodo={addTodoHandler} />
             <TodoList
               todos={todos}
@@ -147,7 +145,7 @@ function App(): JSX.Element {
           >
             <p>Tutorial tooltip with customized styles</p>
           </CustomizedTutorialTooltip> */}
-        </AppTutorial.AppTutorialProvider>
+        </AppTutorialProvider>
       </ThemeProvider>
     </>
   );

@@ -1,19 +1,10 @@
-import AppTutorialProvider from './components/AppTutorialProvider';
-import theme from './services/styled-components/theme';
-import TutorialTooltip from './components/TutorialTooltip';
-import { useTutorialContext } from './hooks/useTutorial';
+export { default as theme } from './services/styled-components/theme';
+export { default as TutorialTooltip } from './components/TutorialTooltip';
+export { useTutorialContext } from './hooks/useTutorial';
+export { default as AppTutorialProvider } from './components/AppTutorialProvider';
 
 // Types
-import { AppTutorialProviderProps } from './components/AppTutorialProvider/AppTutorialProvider';
-import { TutorialTooltipProps } from './components/TutorialTooltip/TutorialTooltip';
-import { StyledTutorialTooltipProps, Activable } from './styles/TutorialTooltip.styled';
-import { TutorialStatus } from './utils/storage';
-
-const module = {
-  AppTutorialProvider,
-  useTutorialContext,
-  TutorialTooltip,
-  theme,
-};
-
-export default module;
+export { AppTutorialProviderProps } from './components/AppTutorialProvider/AppTutorialProvider';
+export { TutorialTooltipProps } from './components/TutorialTooltip/TutorialTooltip';
+export { StyledTutorialTooltipProps, Activable } from './styles/TutorialTooltip.styled';
+export { TutorialStatus } from './utils/storage';

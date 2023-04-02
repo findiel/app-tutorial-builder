@@ -1,13 +1,13 @@
 import React from 'react';
 import { Todo } from '../../App';
-import { useTutorialContext } from '../../hooks/useTutorial';
 import CardWrapper from '../../styles/CardWrapper.styled';
 import RemoveButton from '../../styles/RemoveButton.styled';
 import SetDoneButton from '../../styles/SetDoneButton.styled';
 import StyledTodo from '../../styles/Todo.styled';
-import TutorialTooltip from '../TutorialTooltip';
+// import { useTutorialContext } from '../../hooks/useTutorial';
+// import TutorialTooltip from '../TutorialTooltip';
 import Flex from '../Flex';
-import AppTutorial from 'app-tutorial';
+import { useTutorialContext, TutorialTooltip } from 'app-tutorial';
 
 interface TodoListProps {
   todos: Todo[];
@@ -16,7 +16,7 @@ interface TodoListProps {
 }
 
 const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Element => {
-  const { isTutorialStarted, nextStep } = AppTutorial.useTutorialContext();
+  const { isTutorialStarted, nextStep } = useTutorialContext();
 
   const handleToggleTodo = (todoId: string) => {
     if (isTutorialStarted) {
@@ -41,7 +41,7 @@ const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Ele
           </StyledTodo>
           <Flex>
             {isTutorialStarted ? (
-              <AppTutorial.TutorialTooltip
+              <TutorialTooltip
                 step={3}
                 hideNextButton
                 content={{
@@ -52,14 +52,14 @@ const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Ele
                 <SetDoneButton onClick={handleToggleTodo.bind(null, todo.id)}>
                   {todo.isDone ? 'To do' : 'Done'}
                 </SetDoneButton>
-              </AppTutorial.TutorialTooltip>
+              </TutorialTooltip>
             ) : (
               <SetDoneButton onClick={handleToggleTodo.bind(null, todo.id)}>
                 {todo.isDone ? 'To do' : 'Done'}
               </SetDoneButton>
             )}
             {isTutorialStarted ? (
-              <AppTutorial.TutorialTooltip
+              <TutorialTooltip
                 step={4}
                 hideNextButton
                 content={{
@@ -68,7 +68,7 @@ const TodoList = ({ todos, onRemoveTodo, onToggleTodo }: TodoListProps): JSX.Ele
                 }}
               >
                 <RemoveButton onClick={handleRemoveTodo.bind(null, todo.id)}>Delete</RemoveButton>
-              </AppTutorial.TutorialTooltip>
+              </TutorialTooltip>
             ) : (
               <RemoveButton onClick={handleRemoveTodo.bind(null, todo.id)}>Delete</RemoveButton>
             )}
