@@ -43,7 +43,7 @@ function App(): JSX.Element {
 
 If you pass `autostart` prop to `<TutorialTooltip />` component, the tutorial step will be displayed immediately after the UI is rendered. Once the tutorial is finished, it won't be displayed anymore. The `tutorialStatus` will be set to `DONE`, and stored in the `Local Storage`. If you want to display it one more time, just remove the tutorialStatus from the `Local Storage`.
 <br />
-</br />
+<br />
 It's also possible to restart the tutorial with the UI. For that, you will need to use `useTutorialContext()`. Learn about `startTutorial` and `resetTutorial` functions in the [API section](#api)
 
 result:
