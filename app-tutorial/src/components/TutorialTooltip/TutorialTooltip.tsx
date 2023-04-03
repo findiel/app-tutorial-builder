@@ -13,7 +13,7 @@ import usePosition from '../../hooks/usePosition';
 
 export interface TutorialTooltipProps {
   /* Element to be exposed **/
-  children: JSX.Element;
+  children: React.ReactNode;
   /* Current tutorial step **/
   step: number;
   /* Content of current tutorial step to be displayed in tooltip **/
