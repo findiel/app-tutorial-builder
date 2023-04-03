@@ -52,7 +52,6 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
       </TutorialTooltip>
       <TutorialTooltip
         step={2}
-        lastStep
         content={{
           title: 'Finish adding first TODO',
           text: 'Click add button to finish adding your first TODO',

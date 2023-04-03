@@ -1,6 +1,6 @@
 {
   "name": "app-tutorial",
-  "version": "1.0.10",
+  "version": "1.0.14",
   "description": "app-tutorial is a library which will help you with creating a demo for your application.",
   "main": "dist/app-tutorial.js",
   "types": "dist/types/app-tutorial.d.ts",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "mini-css-extract-plugin": "^2.7.5",
     "ts-loader": "^9.4.2",

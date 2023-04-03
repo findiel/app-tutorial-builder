@@ -1,6 +1,6 @@
-/// <reference types="react" />
+import React from 'react';
 export interface TutorialTooltipProps {
-    children: JSX.Element;
+    children: React.ReactNode;
     step: number;
     content?: TutorialTooltipContent;
     className?: string;
