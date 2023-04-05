@@ -14,6 +14,8 @@ npm install app-tutorial
 
 Wrap your whole application with `<AppTutorialProvider />`, then you can use `<TutorialTooltip />` component in your app to lock the UI until the user finish the tutorial step.
 You could pass any valid [React.ReactNode](https://reactnative.dev/docs/react-node) as a children.
+<br />
+Remember to pass `lastStep` prop to your last `<TutorialTooltip />`.
 
 ```
 import { AppTutorialProvider, TutorialTooltip } from 'app-tutorial';
@@ -123,6 +125,8 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
 export default AddTodoForm;
 ```
 
+If the last step is not rendering the next button and you are using `useTutorialContext()` to deal with the it, then pass `true` to `nextStep()` function to set tutorial as finished. See [nextStep() api](#next-step).
+<br />
 Note that with `nextButtonDisabled` prop you can lock next button until eg. user enter a value to the input. (`<TutorialTooltip />` with step 1).
 <br />
 With hideNextButton prop you can hide next button, so user has to click on the wrapped UI to trigger the `nextStep()` function (`<TutorialTooltip />` with step 2).
@@ -239,13 +243,16 @@ Components API:
 
 ### `useTutorialContext()`
 
-| Name                   | Description                                                        |
-| ---------------------- | ------------------------------------------------------------------ |
-| `nextStep`             | Callback function to be called if you want to go to the next step. |
-| `activeStep`           | Returns the current tutorial step.                                 |
-| `setActiveStep`        | Callback function to set the active tutorial step.                 |
-| `isTutorialStarted`    | Boolean value that returns if the tutorial is started.             |
-| `setIsTutorialStarted` | Function to be called when the tutorial is starting.               |
-| `startTutorial`        | Callback function to start the tutorial.                           |
-| `endTutorial`          | Callback function to finish the tutorial.                          |
-| `resetTutorial`        | Callback function to restart the tutorial (clear `Local Storage`). |
+<a name="next-step"></a>
+
+| Name | Description |
+| Name | Description | Type | Arguments |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|---------------|
+| `nextStep` | A function that increments the `activeStep` state by 1 if `activeStep` is not null, and it's not the last step. If `lastStep` is true, it calls the `endTutorial` function. | `() => void` | `lastStep?: boolean` |
+| `activeStep` | A state that holds the number of the active step of the tutorial. If the tutorial has not started, it is set to `null`. | `number \| null` | - |
+| `setActiveStep` | A function that sets the value of `activeStep` to the given argument. | `(value: number \| null) => void` | `value: number \| null` |
+| `isTutorialStarted`| A state that holds a boolean indicating whether the tutorial has started or not. | `boolean` | - |
+| `setIsTutorialStarted` | A function that sets the value of `isTutorialStarted` to the given argument. | `(value: boolean) => void` | `value: boolean` |
+| `startTutorial` | A function that sets `isTutorialStarted` to `true`, stores the tutorial status in local storage as "playing", and sets the active step to the given argument (default is 0). | `(step?: number) => void` | `step?: number` |
+| `endTutorial` | A function that sets `isTutorialStarted` to `false`, stores the tutorial status in local storage as "done", and sets the active step to `null`. | `() => void` | - |
+| `resetTutorial` | A function that sets `isTutorialStarted` to `false`, clears the tutorial status from local storage, and sets the active step to `null`. | `() => void` | - |
