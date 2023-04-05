@@ -125,7 +125,8 @@ const AddTodoForm = ({ onAddTodo }: AddTodoFormProps): JSX.Element => {
 export default AddTodoForm;
 ```
 
-If the last step is not rendering the next button and you are using `useTutorialContext()` to deal with the it, then pass `true` to `nextStep()` function to set tutorial as finished. See [nextStep() api](#next-step).
+If the your last tutorial step component is not rendering next button and you are using `useTutorialContext()`, then pass `true` to `nextStep()` function to set tutorial as finished. See [nextStep api](#nextStep)
+<br />
 <br />
 Note that with `nextButtonDisabled` prop you can lock next button until eg. user enter a value to the input. (`<TutorialTooltip />` with step 1).
 <br />
@@ -243,7 +244,7 @@ Components API:
 
 ### `useTutorialContext()`
 
-<a name="next-step"></a>
+<a name="nextStep"></a>
 
 | Name | Description |
 | Name | Description | Type | Arguments |

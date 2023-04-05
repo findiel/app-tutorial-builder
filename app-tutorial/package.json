@@ -1,6 +1,6 @@
 {
   "name": "app-tutorial",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "app-tutorial is a library which will help you with creating a demo for your application.",
   "main": "dist/app-tutorial.js",
   "types": "dist/types/app-tutorial.d.ts",
