@@ -1,6 +1,7 @@
 # app-tutorial
 
 app-tutorial is a library which will help you with creating a demo for your application.
+[NPM documentation](https://www.npmjs.com/package/app-tutorial)
 
 ## Installation
 
