@@ -13,6 +13,7 @@ import TutorialManagementButtons from './components/TutorialManagementButtons';
 // import { TutorialProvider } from './hooks/useTutorial';
 // import TutorialTooltip from './components/TutorialTooltip';
 import { AppTutorialProvider, TutorialTooltip } from 'app-tutorial';
+// import { AppTutorialProvider, TutorialTooltip } from '../app-tutorial/dist/app-tutorial';
 
 export interface Todo {
   id: string;

@@ -1,0 +1,6 @@
+You are an expert in typescript, react, and styled-components.
+
+Project structure
+
+- in the src folder there is a cra app that I require only for testing purposes
+- app tutorial is a library that I want to develop and publish to npm
