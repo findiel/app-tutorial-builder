@@ -6,22 +6,44 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: './src/app-tutorial.ts',
   output: {
-    filename: 'app-tutorial.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'app-tutorial',
-    libraryTarget: 'umd',
+    filename: 'app-tutorial.js',
+    library: {
+      name: 'app-tutorial',
+      type: 'umd',
+      umdNamedDefine: true,
+    },
+    globalObject: 'typeof self !== "undefined" ? self : this',
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+  },
+  externals: {
+    react: {
+      commonjs: 'react',
+      commonjs2: 'react',
+      amd: 'react',
+      root: 'React',
+    },
+    'react-dom': {
+      commonjs: 'react-dom',
+      commonjs2: 'react-dom',
+      amd: 'react-dom',
+      root: 'ReactDOM',
+    },
+    'styled-components': {
+      commonjs: 'styled-components',
+      commonjs2: 'styled-components',
+      amd: 'styled-components',
+      root: 'styled-components',
+    },
   },
   module: {
     rules: [
       {
-        test: /\.(ts|tsx)$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'ts-loader',
-        },
       },
       {
         test: /\.css$/,
@@ -38,7 +60,4 @@ module.exports = {
       patterns: [{ from: 'README.md', to: './' }],
     }),
   ],
-  externals: {
-    react: 'commonjs react',
-  },
 };

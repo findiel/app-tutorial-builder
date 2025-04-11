@@ -1,13 +1,15 @@
 {
   "name": "app-tutorial",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "app-tutorial is a library which will help you with creating a demo for your application.",
   "main": "dist/app-tutorial.js",
+  "module": "dist/app-tutorial.esm.js",
   "types": "dist/types/app-tutorial.d.ts",
   "typings": "dist/app-tutorial.d.ts",
   "files": [
     "dist/*"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "webpack --mode production",
     "build:watch": "webpack --watch",
