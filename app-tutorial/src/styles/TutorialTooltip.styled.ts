@@ -1,35 +1,35 @@
 import styled from 'styled-components';
 
 export interface StyledTutorialTooltipProps extends Activable {
-  top: number;
-  left: number;
-  width?: number;
+  $top: number;
+  $left: number;
+  $width?: number;
 }
 
 export interface Activable {
-  active: boolean;
+  $active: boolean;
 }
 
 export const Wrapper = styled.div<Activable>`
   position: relative;
-  z-index: ${({ active }) => (active ? 2147483647 : 'auto')}; //Max z-index value by default
+  z-index: ${({ $active }) => ($active ? 2147483647 : 'auto')}; //Max z-index value by default
 `;
 
 export const ChildElementWrapper = styled.div<Activable>`
-  background-color: ${({ theme, active }) => (active ? theme.colors.common.white : 'inherit')};
+  background-color: ${({ theme, $active }) => ($active ? theme.colors.common.white : 'inherit')};
   padding: 10px;
   border-radius: 8px;
 `;
 
 export const StyledTutorialTooltip = styled.div<StyledTutorialTooltipProps>`
-  display: ${({ active }) => (active ? 'block' : 'none')};
+  display: ${({ $active }) => ($active ? 'block' : 'none')};
   position: absolute;
-  top: ${({ top }) => top + 'px'};
-  left: ${({ left }) => left + 'px'};
+  top: ${({ $top }) => $top + 'px'};
+  left: ${({ $left }) => $left + 'px'};
   min-width: 300px;
   max-width: 500px;
   box-sizing: border-box;
-  width: ${({ width }) => (width ? width + 'px' : 'auto')};
+  width: ${({ $width }) => ($width ? $width + 'px' : 'auto')};
   background-color: ${({ theme }) => theme.colors.primary.main};
   color: ${({ theme }) => theme.colors.common.white};
   border-radius: 16px;
@@ -60,19 +60,19 @@ export const ButtonsWrapper = styled.div`
 export const Button = styled.button<Activable>`
   padding: 8px 32px;
   border-radius: 32px;
-  border: ${({ theme, active }) =>
-    `1px ${active ? theme.colors.common.white : theme.colors.disabled.main} solid`};
-  color: ${({ theme, active }) =>
-    active ? theme.colors.common.white : theme.colors.disabled.main};
+  border: ${({ theme, $active }) =>
+    `1px ${$active ? theme.colors.common.white : theme.colors.disabled.main} solid`};
+  color: ${({ theme, $active }) =>
+    $active ? theme.colors.common.white : theme.colors.disabled.main};
   font-size: 18px;
-  background-color: ${({ theme, active }) =>
-    active ? theme.colors.primary.main : theme.colors.primary.dark};
-  cursor: ${({ active }) => (active ? 'pointer' : 'auto')};
-  transition: ${({ active }) => (active ? 'all 0.3s' : 'none')};
+  background-color: ${({ theme, $active }) =>
+    $active ? theme.colors.primary.main : theme.colors.primary.dark};
+  cursor: ${({ $active }) => ($active ? 'pointer' : 'auto')};
+  transition: ${({ $active }) => ($active ? 'all 0.3s' : 'none')};
 
   &:hover {
-    background-color: ${({ theme, active }) =>
-      active ? theme.colors.primary.light : theme.colors.primary.dark};
+    background-color: ${({ theme, $active }) =>
+      $active ? theme.colors.primary.light : theme.colors.primary.dark};
   }
 `;
 

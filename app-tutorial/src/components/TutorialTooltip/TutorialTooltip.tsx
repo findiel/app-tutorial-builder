@@ -101,21 +101,21 @@ function TutorialTooltip({
   return (
     <>
       {isCurrentTutorialStepDisplayed && <Overlay></Overlay>}
-      <Wrapper className={className} active={isCurrentTutorialStepDisplayed}>
+      <Wrapper className={className} $active={isCurrentTutorialStepDisplayed}>
         <ChildElementWrapper
           ref={childContainerRef}
           className="child-element-wrapper"
-          active={isCurrentTutorialStepDisplayed}
+          $active={isCurrentTutorialStepDisplayed}
         >
           {children}
         </ChildElementWrapper>
         <StyledTutorialTooltip
           ref={tutorialTooltipRef}
           className="tutorial-tooltip"
-          active={isCurrentTutorialStepDisplayed}
-          top={position.top}
-          left={position.left}
-          width={computedWidth}
+          $active={isCurrentTutorialStepDisplayed}
+          $top={position.top}
+          $left={position.left}
+          $width={computedWidth}
         >
           {content?.title && <h1 className="title">{content.title}</h1>}
           {content?.text && <p className="text">{content.text}</p>}
@@ -124,14 +124,18 @@ function TutorialTooltip({
             <>
               <ButtonsWrapper className="buttons-wrapper">
                 {!hideSkipTutorialButton && (
-                  <Button className="skip-tutorial-btn" active onClick={endTutorial}>
+                  <Button
+                    className="skip-tutorial-btn"
+                    $active={!nextButtonDisabled}
+                    onClick={endTutorial}
+                  >
                     {skipTutorialBtnText}
                   </Button>
                 )}
                 {!hideNextButton && (
                   <Button
                     className="next-btn"
-                    active={!nextButtonDisabled}
+                    $active={!nextButtonDisabled}
                     onClick={nextStep.bind(null, lastStep)}
                     disabled={nextButtonDisabled}
                   >

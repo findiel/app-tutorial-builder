@@ -1,10 +1,10 @@
 export interface StyledTutorialTooltipProps extends Activable {
-    top: number;
-    left: number;
-    width?: number;
+    $top: number;
+    $left: number;
+    $width?: number;
 }
 export interface Activable {
-    active: boolean;
+    $active: boolean;
 }
 export declare const Wrapper: import("styled-components").StyledComponent<"div", any, Activable, never>;
 export declare const ChildElementWrapper: import("styled-components").StyledComponent<"div", any, Activable, never>;
